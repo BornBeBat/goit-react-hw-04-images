@@ -4,13 +4,13 @@ import s from './ImageGallery.module.scss';
 export const ImageGallery = ({ data, onClick }) => {
   return (
     <ul className={s.gallery}>
-      {data.map(({ webformatURL, largeImageURL, tags }, id) => {
+      {data.map(({ urls, alt_description, id }) => {
         return (
           <ImageGalleryItem
             key={id}
-            img={webformatURL}
-            largeImg={largeImageURL}
-            tags={tags}
+            img={urls.small}
+            largeImg={urls.regular}
+            tags={alt_description}
             onClick={onClick}
           />
         );

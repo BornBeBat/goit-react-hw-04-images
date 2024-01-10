@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Audio } from 'react-loader-spinner';
 
 import s from './App.module.scss';
-import API from 'servises/pixAPI';
+import API from 'api/pixAPI';
 
 import { status } from 'tools';
 import { Button } from 'components/Button';
@@ -32,7 +32,7 @@ export class App extends Component {
       try {
         const data = await API.getPhotosAxios(state.searchQuery, state.page);
         this.setState(prevState => ({
-          data: [...prevState.data, ...data.hits],
+          data: [...prevState.data, ...data.results],
           status: status.RESPONSE,
         }));
         this.notification(data);
@@ -43,12 +43,12 @@ export class App extends Component {
     }
   }
 
-  notification = ({ totalHits, hits }) => {
-    if (totalHits % 12 === hits.length && hits.length !== 0) {
+  notification = ({ total, results }) => {
+    if (total % 12 === results.length && results.length !== 0) {
       toast.warn(`We're sorry, but you've reached the end of search results.`);
       this.setState({ status: status.REJECT });
     }
-    if (totalHits === 0) {
+    if (total === 0) {
       toast.warn(`We're sorry, but we can't find anything by yours request.`);
       this.setState({ status: status.REJECT });
     }

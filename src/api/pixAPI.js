@@ -2,24 +2,28 @@ import axios from 'axios';
 /* =====================================================
 =============Class for work with API Servises
 ========================================================*/
+// const proxi = {};
 class ApiServise {
   constructor() {
     this.option = {
-      url: 'https://pixabay.com/api/',
-      method: 'get',
+      url: 'https://api.unsplash.com/search/photos',
+      headers: {
+        common: {
+          Authorization:
+            'Client-ID 42Js-asypicJajKFLohxUiNH3swR-7YGPsUe-TDMXjA',
+        },
+      },
       params: {
-        key: '41071182-18ccbddfe29083241d2882ae4',
-        q: '',
-        image_type: 'photo',
+        query: '',
         per_page: '12',
-        orientation: 'horizontal',
         page: 1,
+        orientation: 'portrait',
       },
     };
   }
 
   async getPhotosAxios(value, page) {
-    this.option.params.q = value;
+    this.option.params.query = value;
     this.option.params.page = page || 1;
     const response = await axios(this.option);
     return response.data;

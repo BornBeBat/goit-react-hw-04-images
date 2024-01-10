@@ -38,7 +38,7 @@ export const Modal = ({ info, onClick }) => {
   return createPortal(
     <div className={s.overlay} onClick={handleClick}>
       <div className={s.modal}>
-        <img src={largeImg} alt={tags} />
+        <img className={s.image} src={largeImg} alt={tags} />
       </div>
     </div>,
     modalRoot
