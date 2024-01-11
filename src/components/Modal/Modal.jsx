@@ -9,20 +9,21 @@ export const Modal = ({ info, onClick }) => {
    * Effect
    */
   useEffect(() => {
+    const handleEscape = event => {
+      if (event.code === 'Escape') {
+        onClick();
+      }
+    };
     window.addEventListener('keydown', handleEscape);
 
     return () => {
       window.removeEventListener('keydown', handleEscape);
     };
-  });
+  }, [onClick]);
   /**
    * Functions
    */
-  function handleEscape(event) {
-    if (event.code === 'Escape') {
-      onClick();
-    }
-  }
+
   const handleClick = event => {
     const { target, currentTarget } = event;
     if (target === currentTarget) {
